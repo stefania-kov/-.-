@@ -27,4 +27,6 @@ urlpatterns = [
     path('add_feedback/<int:app_id>/', views.add_feedback, name='add_feedback'),
     path('logout/', views.logout_user, name='logout'),
     path('create_application/', views.create_application, name='create_application'),
+    path('robots.txt/', views.robots, name='robots'),
+    path('sitemap.xml/', views.sitemap, name='sitemap'),
 ]

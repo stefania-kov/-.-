@@ -139,3 +139,9 @@ def admin_panel(request):
         'applications': page_obj,
         'status_choices': Application.STATUS_CHOICES
     })
+
+def robots (request):
+    return render(request, 'robots.txt', content_type='text/plain')
+
+def sitemap (request):
+    return render(request, 'sitemap.xml', content_type='application/xml')

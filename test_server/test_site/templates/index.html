@@ -2,35 +2,135 @@
 {% load static %}
 {% block title %}Главная{% endblock %}
 
-{% block description %}Главная страница для озакомления с сайтом{% endblock %}
+{% block description %}Главная страница для ознакомления с сайтом{% endblock %}
 
 {% block keywords %}Главная, слайдер, текст{% endblock %}
 
 {% block content %}
-    <h1 style="text-align: center;">Записи на онлайн курсы дополнительного профессионального образования</h1>
+    <h1 style="text-align: center; margin-bottom: 30px; color: #333;">
+        Записи на онлайн курсы дополнительного профессионального образования
+    </h1>
 
-    <div id="carouselExampleControls"  class="carousel slide mx-auto" data-bs-ride="carousel" data-bs-interval="3000" style="width: 50%;">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="{% static 'img/1.png' %}" class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img src="{% static 'img/2.jpeg' %}" class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img src="{% static 'img/3.webp' %}" class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img src="{% static 'img/4.webp' %}" class="d-block w-100" alt="...">
-          </div>
+    <style>
+        /* Стили для красивого слайдера */
+        .carousel {
+            max-width: 800px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 40px;
+        }
+        
+        .carousel-item img {
+            height: 400px; /* Одинаковая высота для всех */
+            object-fit: cover; /* Обрезает изображение, сохраняя пропорции */
+            object-position: center; /* Центрирует изображение */
+        }
+        
+        /* Красивые кнопки управления */
+        .carousel-control-prev,
+        .carousel-control-next {
+            background-color: rgba(0, 0, 0, 0.3);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-control-prev {
+            left: 20px;
+        }
+        
+        .carousel-control-next {
+            right: 20px;
+        }
+        
+        .carousel-control-prev:hover,
+        .carousel-control-next:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+            opacity: 1;
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        /* Индикаторы (точечки) */
+        .carousel-indicators {
+            margin-bottom: 15px;
+        }
+        
+        .carousel-indicators button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.7);
+            margin: 0 5px;
+            border: 2px solid rgba(0,0,0,0.3);
+        }
+        
+        .carousel-indicators button.active {
+            background-color: #007bff;
+            transform: scale(1.2);
+        }
+        
+        /* Адаптация для мобильных */
+        @media (max-width: 768px) {
+            .carousel-item img {
+                height: 250px;
+            }
+            
+            .carousel {
+                width: 100% !important;
+                border-radius: 0;
+            }
+            
+            .carousel-control-prev,
+            .carousel-control-next {
+                width: 35px;
+                height: 35px;
+            }
+        }
+    </style>
+
+    <div id="carouselExampleControls" class="carousel slide mx-auto" 
+         data-bs-ride="carousel" data-bs-interval="3000" style="width: 80%;">
+        
+        <!-- Индикаторы -->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleControls" 
+                    data-bs-slide-to="0" class="active" aria-current="true"></button>
+            <button type="button" data-bs-target="#carouselExampleControls" 
+                    data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#carouselExampleControls" 
+                    data-bs-slide-to="2"></button>
+            <button type="button" data-bs-target="#carouselExampleControls" 
+                    data-bs-slide-to="3"></button>
         </div>
-        <button style="background-color: aquamarine;" class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Назад</span>
+        
+        <!-- Изображения -->
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{% static 'img/1.png' %}" class="d-block w-100" alt="Курс программирования">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'img/2.jpeg' %}" class="d-block w-100" alt="Курс веб-дизайна">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'img/3.webp' %}" class="d-block w-100" alt="Курс баз данных">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'img/4.webp' %}" class="d-block w-100" alt="Дипломы">
+            </div>
+        </div>
+        
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Назад</span>
         </button>
-        <button style="background-color: aquamarine;" class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Вперед</span>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Вперед</span>
         </button>
-      </div>
+    </div>
 {% endblock %}
