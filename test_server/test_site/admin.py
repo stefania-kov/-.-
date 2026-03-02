@@ -9,17 +9,12 @@ class CustomUserAdmin(admin.ModelAdmin):
     search_fields = ('username', 'email', 'fio', 'phone')
     ordering = ('-id',)
 
-@admin.register(Course)
-class CourseAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name')
-    search_fields = ('name',)
-
 @admin.register(Application)
 class ApplicationAdmin(admin.ModelAdmin):
     list_display = ('id', 'user', 'course', 'start_date', 'payment_method', 'status', 'created_at')
     list_filter = ('status', 'payment_method', 'created_at')
     search_fields = ('user__username', 'user__fio', 'course__name', 'feedback')
-    list_editable = ('status',)  # Можно менять статус прямо в списке
+    list_editable = ('status',)
     list_per_page = 20
     date_hierarchy = 'created_at'
     
