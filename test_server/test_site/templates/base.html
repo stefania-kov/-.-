@@ -11,9 +11,286 @@
     <link href="{% static 'bootstrap.css'%}" rel="stylesheet">
 </head>
 <body>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Стили для навигации */
+        .navbar {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            background: linear-gradient(to right, #ffffff, #f8f9fa) !important;
+            padding: 10px 20px;
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #007bff !important;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Стили для логотипа */
+        .navbar-brand img {
+            height: 40px;
+            width: auto;
+            transition: transform 0.3s ease;
+            border-radius: 8px;
+        }
+
+        .navbar-brand:hover img {
+            transform: rotate(5deg) scale(1.1);
+        }
+
+        .nav-link {
+            font-size: 1.1rem;
+            margin: 0 5px;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+        }
+
+        .nav-link:hover {
+            background-color: #007bff;
+            color: white !important;
+            transform: translateY(-2px);
+        }
+
+        /* Основной контент */
+        .container {
+            flex: 1;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Карточки для форм и заявок */
+        .card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .card-body {
+            padding: 25px;
+        }
+
+        /* Стили для кнопок */
+        .btn {
+            border-radius: 25px;
+            padding: 10px 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #007bff, #00d4ff);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #0056b3, #00a3cc);
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+        }
+
+        .btn-outline-danger {
+            border: 2px solid #dc3545;
+            color: #dc3545;
+            background: transparent;
+        }
+
+        .btn-outline-danger:hover {
+            background: #dc3545;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Стили для форм */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+            outline: none;
+        }
+
+        label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        /* Таблицы для заявок */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px;
+            font-weight: 600;
+        }
+
+        .table td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .table tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        /* Алерты и уведомления */
+        .alert {
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .alert-success {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+        }
+
+        .alert-error {
+            background: linear-gradient(45deg, #dc3545, #c82333);
+            color: white;
+        }
+
+        /* Футер */
+        footer {
+            background: linear-gradient(to right, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            margin-top: auto;
+            font-size: 1rem;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .navbar-brand {
+                font-size: 1.4rem;
+            }
+            
+            .navbar-brand img {
+                height: 30px;
+            }
+            
+            .nav-link {
+                font-size: 1rem;
+            }
+            
+            .card-body {
+                padding: 15px;
+            }
+            
+            .table {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Стили для главной страницы */
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #333, #007bff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 40px;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Информация о пользователе */
+        .navbar-text {
+            font-weight: 600;
+            color: #007bff !important;
+            padding: 8px 15px;
+            background: rgba(0, 123, 255, 0.1);
+            border-radius: 20px;
+        }
+
+        .fa-user {
+            margin-right: 5px;
+            color: #007bff;
+        }
+    </style>
+    
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'index' %}">Корочки.есть</a>
+            <a class="navbar-brand" href="{% url 'index' %}">
+                <img src="{% static 'img/logo.png' %}" alt="Логотип Корочки.есть" onerror="this.style.display='none'">
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -56,7 +333,9 @@
     </nav>
 
     {% block content %}{% endblock %}
+    
     <footer style="text-align: center;">2026</footer>
+    
     <script src="{% static 'bootstrap.bundle.js'%}"></script>
 </body>
 </html>
