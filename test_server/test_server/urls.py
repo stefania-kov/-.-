@@ -14,8 +14,14 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+"""
+URL configuration for test_server project.
+"""
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
+from django.conf import settings  # Добавьте этот импорт
+from django.conf.urls.static import static  # Добавьте этот импорт
+from django.views.static import serve  # Добавьте этот импорт
 from test_site import views
 
 urlpatterns = [
@@ -30,3 +36,13 @@ urlpatterns = [
     path('robots.txt/', views.robots, name='robots'),
     path('sitemap.xml/', views.sitemap, name='sitemap'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    # Добавляем заголовки кэширования для медиа
+    urlpatterns += [
+        re_path(r'^media/(?P<path>.*)$', serve, {
+            'document_root': settings.MEDIA_ROOT,
+            'show_indexes': False,
+        }),
+    ]

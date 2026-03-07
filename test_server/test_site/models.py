@@ -8,7 +8,6 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return self.username
 
-# ДОБАВЬТЕ ЭТУ МОДЕЛЬ
 class Course(models.Model):
     name = models.CharField('Название курса', max_length=200)
     
